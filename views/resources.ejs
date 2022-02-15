@@ -43,26 +43,19 @@
   </head>
 
   <body>
-    <!-- Navbar -->
-    <div>
-      <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-          <form class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button type="button" class="btn btn-outline-secondary">
-              Search
-            </button>
+    <section name="search">
+          <form class="form-inline" method="post" action="/api/resources/searchResults" >
+        <select class="form-select" name="category">
+          <option value="boxing">Boxing</option>
+          <option value="news">News</option>
+          <option value="creative">Creative</option>
+          <option value="fashion">fashion</option>
+          <option value="sports">Sports</option>
+        </select><br>
+          <input class="form-control me-2" type="text" name="title" placeholder="title" aria-label="Search"/>
+            <button type="submit" class="btn btn-outline-secondary"> Search</button>
           </form>
-        </div>
-      </nav>
-    </div>
-
-    <!--  -->
+    </section>
     <main>
       <% resources.forEach(resource => {%>
       <section class="resources">
@@ -90,6 +83,13 @@
         </div>
         <div class="rating">
           <p>*****</p>
+          <div class="likes">
+            <i class="fa-regular fa-heart"></i>
+            <p>4</p>
+          </div>
+        </div>
+        <div class="comments">
+          <p>comments go here</p>
           <div class="likes">
             <i class="fa-regular fa-heart"></i>
             <p>4</p>
