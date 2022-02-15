@@ -7,7 +7,7 @@
 
 $(document).ready(function () {
 
-  $(".get-comment").on("submit", function (e) {
+  $(".post-comment").on("submit", function (e) {
     e.preventDefault();
 
     //To preserve the context of which comment submission we're acting on
@@ -95,11 +95,6 @@ $(document).ready(function () {
         <div>
           <output name="postDate" class="postDate">${commentData.created_at}</output>
         </div>
-        <div class="flags">
-          <a href="#"><span class="fa-solid fa-flag"></span></a>
-          <a href="#"><span class="fa-solid fa-recomment"></span></a>
-          <a href="#"><span class="fa-solid fa-heart"></span></a>
-        </div>
       </footer>
     </article>`;
 
@@ -109,4 +104,6 @@ $(document).ready(function () {
     //Appends the contents to dynamically created elements, ensures the right comments are appended to the right posts.
     $('#comment-listing-' + resourceid).append(comment);
   }
+
+ 
 });
