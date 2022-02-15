@@ -3,7 +3,6 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.post("/new", (req, res) => {
-    console.log(req.body);
 
     const queryString = `INSERT INTO resources(
       user_id,
@@ -31,6 +30,42 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
+  });
+
+  router.post("/searchResults", (req, res) => {
+    const queryParams = [];
+    let queryString = `SELECT resources.*, users.name FROM resources JOIN Users ON users.id = 
+    resources.user_id WHERE resources.id IS NOT NULL `;
+
+      //validate that search queries exist and then add on to the query
+      if (!req.body.title == "") {
+        queryParams.push(`%${req.body.title}%`);
+        queryString += ` AND resources.title LIKE $${queryParams.length} `;
+    
+      }
+
+      if (!req.body.category == "") {
+        queryParams.push(req.body.category);
+        queryString += `AND resources.category = $${queryParams.length} `;
+    
+      }
+      queryString += `GROUP BY resources.id, users.name ;`;
+
+      db.query(queryString, queryParams)
+      .then(data => {
+        if(data){
+          const resources = data.rows;
+          res.render('resources',{resources});
+          return;
+        }
+        res.send('No matching search results');
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  
   });
 
   router.get("/", (req, res) => {

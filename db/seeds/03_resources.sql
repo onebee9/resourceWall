@@ -10,7 +10,7 @@ VALUES (2,
 'waterfront',
 'It has survived not only five centuries, but also the leap into electronic typesetting, 
 remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages',
-'boxing',
+'sports',
 'https://images.pexels.com/photos/2086676/pexels-photo-2086676.jpeg?auto=compress&cs=tinysrgb&h=350');
 
 INSERT INTO resources (user_id,title,description, category, resource_link) 
@@ -32,6 +32,19 @@ INSERT INTO resources (user_id,title,description, category, resource_link)
 VALUES (5,
 'learning',
 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believable',
-'boxing',
+'fashion',
 'https://images.pexels.com/photos/2086676/pexels-photo-2086676.jpeg?auto=compress&cs=tinysrgb&h=350');
 
+INSERT INTO resources (user_id,title,description, category, resource_link) 
+VALUES (2,
+'fashionista',
+'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believable',
+'fashion',
+'https://images.pexels.com/photos/2086676/pexels-photo-2086676.jpeg?auto=compress&cs=tinysrgb&h=350');
+
+INSERT INTO resources (user_id,title,description, category, resource_link) 
+VALUES (5,
+'learning',
+'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believable',
+'creative',
+'https://images.pexels.com/photos/2086676/pexels-photo-2086676.jpeg?auto=compress&cs=tinysrgb&h=350');
