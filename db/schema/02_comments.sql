@@ -6,5 +6,5 @@ CREATE TABLE comments (
   resource_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
 
   comment TEXT,
-  created_at TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
