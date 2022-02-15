@@ -21,5 +21,40 @@ module.exports = (db) => {
         .json({ error: err.message });
       });
   });
+
+  router.get("/login", (req, res) => {
+    res.render("login");
+  })
+
+  router.post("/login", (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const queryString = `SELECT * FROM users
+                          WHERE email = $1 AND password = $2;`;
+
+    if(email && password){
+      db.query(queryString, [email, password])
+      .then(data => {
+        if (data.rows[0]) {
+           req.session.user_id = data.rows[0].id;
+           res.redirect("/");
+        }
+        else{
+          res.redirect("/api/users/login");
+        }
+      })
+    } else {
+      res.send('You must enter a username and password!');
+      res.redirect("/api/users/login");
+    }
+
+  })
   return router;
 };
+
+router.get('/logout', (req, res) => {
+  req.session = null;
+  res.clearCookie('user_id');
+  res.redirect('/api/users/login');
+});
