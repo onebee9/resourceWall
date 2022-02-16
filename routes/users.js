@@ -50,11 +50,12 @@ module.exports = (db) => {
       return;
     }
 
-    const queryString = `SELECT resources.*, users.*
+    const queryString = `SELECT resources.*, users.*, likes.*
     FROM resources
     JOIN users ON users.id = resources.user_id
-
-    WHERE user_id = $1`;
+    JOIN likes ON likes.id = likes.user_id
+    WHERE users.id = $1 OR likes.resource_like = true
+    GROUP BY resources.id, users.id`;
 
     db.query(queryString, [userId])
       .then((data) => {
@@ -75,4 +76,4 @@ module.exports = (db) => {
   return router;
 };
 
-// JOIN likes ON likes.id = likes.user_id likes.*
+//  likes.*

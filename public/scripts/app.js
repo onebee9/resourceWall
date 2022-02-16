@@ -343,18 +343,14 @@ $(document).ready(function () {
     if ($(this).hasClass("liked")) {
       $(this).html('<i class="fa-regular fa-heart"></i>');
       $(this).removeClass("liked");
-
-      // adding liked resource to the db
     } else {
       $(this).html('<i class="fa fa-heart"></i>');
       $(this).addClass("liked");
       // removing it from the db
     }
   });
+
+  // append like to the profile page
 });
-
-// inesert a new row into the likes table with the resource id and the user Id
-
-// post the liked resource to the db
 
 // on the proflie page, get all the liked resources that match the user id
