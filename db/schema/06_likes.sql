@@ -7,3 +7,4 @@ CREATE TABLE likes (
 
   resource_like BOOLEAN DEFAULT FALSE
 );
+
