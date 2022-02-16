@@ -49,7 +49,7 @@ module.exports = (db) => {
     const userId = req.session.user_id;
 
     if (!userId) {
-      res.send({ message: "not logged in" });
+      res.redirect('/users/login');
       return;
     }
 

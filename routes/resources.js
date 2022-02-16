@@ -3,10 +3,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.post("/new", (req, res) => {
-<<<<<<< HEAD
     const userID = req.session.user_id;
-=======
->>>>>>> master
     const queryString = `INSERT INTO resources(
       user_id,
       title,
@@ -26,11 +23,7 @@ module.exports = (db) => {
       .then((data) => {
         const newResource = data.rows;
         // res.send({ newResource });
-<<<<<<< HEAD
         res.redirect('/resources');
-=======
-        res.redirect("/api/resources");
->>>>>>> master
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -38,10 +31,7 @@ module.exports = (db) => {
   });
 
   router.post("/comments", (req, res) => {
-<<<<<<< HEAD
     const userID = req.session.user_id;
-=======
->>>>>>> master
     const queryString = `INSERT INTO comments(
       user_id,
       resource_id,
@@ -57,11 +47,7 @@ module.exports = (db) => {
       .then((data) => {
         const newResource = data.rows;
         // res.send({ newResource });
-<<<<<<< HEAD
         res.redirect('/resources');
-=======
-        res.redirect("/api/resources");
->>>>>>> master
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -69,16 +55,8 @@ module.exports = (db) => {
   });
 
   router.get("/comments", (req, res) => {
-<<<<<<< HEAD
     db.query(`SELECT comments.*, users.name FROM comments JOIN Users ON users.id = comments.user_id;`)
       .then(data => {
-=======
-    db.query(
-      `SELECT comments.*, users.name FROM comments JOIN Users ON users.id = comments.user_id;`
-    )
-      .then((data) => {
-        console.log(data.rows);
->>>>>>> master
         res.json(data.rows);
       })
       .catch((err) => {
@@ -89,14 +67,8 @@ module.exports = (db) => {
   router.get("/comments/:postID", (req, res) => {
     const value = req.params.postID;
     const queryString = `SELECT comments.*, users.name FROM comments JOIN Users ON users.id = comments.user_id WHERE comments.resource_id = $1 ;`;
-<<<<<<< HEAD
     db.query(queryString,[value])
       .then(data => {
-=======
-    db.query(queryString, [value])
-      .then((data) => {
-        console.log(data.rows);
->>>>>>> master
         res.json(data.rows);
       })
       .catch((err) => {
@@ -135,35 +107,16 @@ module.exports = (db) => {
       });
   });
 
-<<<<<<< HEAD
   router.get("/", (req, res) => { 
     db.query(`SELECT resources.*, users.name FROM resources JOIN Users ON users.id = resources.user_id;`)
       .then(data => {
         const resources = data.rows;
         res.render('resources', { resources });
-=======
-  router.get("/", (req, res) => {
-    const { id } = req.query;
-
-    let qs = ``;
-    if (id) {
-      qs = `SELECT * FROM resources WHERE ${id} = resources.user_id;`;
-    } else {
-      qs = `SELECT resources.*, users.name FROM resources JOIN Users ON users.id = resources.user_id;`;
-    }
-
-    db.query(qs)
-      .then((data) => {
-        const resources = data.rows;
-
-        res.render("resources", { resources });
->>>>>>> master
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
-<<<<<<< HEAD
 
   router.get("/new", (req, res) => {// makes a request to localhost:3000/resources/new
     const id = req.session.user_id;
@@ -172,19 +125,6 @@ module.exports = (db) => {
     } else {
       res.redirect("/users/login");
     }
-=======
-  router.get("/new", (req, res) => {
-    // const id = req.session.user_id;
-    // if (id) {
-    //   const templateVars = {
-    //     user: users[id]
-    //   };
-    //   res.render("urls_new", templateVars);
-    // } else {
-    //   res.redirect("/login");
-    // }
-    res.render("create_resource");
->>>>>>> master
   });
 
   return router;
