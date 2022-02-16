@@ -47,13 +47,10 @@ const usersRoute = require("./routes/users");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoute(db));
-app.use("/api/resources", resourcesRoute(db));
-app.use("/api/resources/new", resourcesRoute(db));
-app.use("/api/resources/searchResults", resourcesRoute(db));
-app.use("/api/resources/comments", resourcesRoute(db));
-app.use("/api/resources/comments/:postID", resourcesRoute(db));
-// app.use("/api/widgets", widgetsRoutes(db));
+app.use("/users", usersRoute(db));
+app.use("/resources", resourcesRoute(db));
+
+// app.use("/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -61,9 +58,9 @@ app.use("/api/resources/comments/:postID", resourcesRoute(db));
 // Separate them into separate routes files (see above).
 // For rendering static files only
 
-app.get("/", (req, res) => {
-  res.render("index");
+app.get("/", (req, res) => { // makes a request to localhost:3000
+  res.redirect("/users/login");
 });
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`Resource wall app listening on port ${PORT}`);
 });
