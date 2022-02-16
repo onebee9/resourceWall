@@ -1,68 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Home Page</title>
 
-<head>
-  <title>Home Page</title>
+    <!-- External Styles -->
 
-  <!-- External Styles -->
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <!--  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,wght@0,200;0,400;1,300&display=swap"
+      rel="stylesheet"
+    />
 
-  <!--  -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,wght@0,200;0,400;1,300&display=swap"
-    rel="stylesheet" />
+    <!--  -->
 
-  <!--  -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <!-- App Style -->
 
-  <!-- App Style -->
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
 
-  <link rel="stylesheet" href="/styles/main.css" type="text/css">
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
 
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-</head>
+  <body>
+    <section class="search">
+      <form class="form-inline" method="post" action="/resources/searchResults">
+        <select
+          class="form-select"
+          name="category"
+          placeholder="Select category"
+        >
+          <option>Select category</option>
+          <option value="boxing">Boxing</option>
+          <option value="news">News</option>
+          <option value="creative">Creative</option>
+          <option value="fashion">fashion</option>
+          <option value="sports">Sports</option></select
+        ><br />
+        <input
+          class="form-control me-2"
+          type="text"
+          name="title"
+          placeholder="title"
+          aria-label="Search"
+        />
 
-<body>
- 
-  <section class="search">
-    <form class="form-inline" method="post" action="/resources/searchResults">
-      <select class="form-select" name="category" placeholder="Select category">
-        <option>Select category</option>
-        <option value="boxing">Boxing</option>
-        <option value="news">News</option>
-        <option value="creative">Creative</option>
-        <option value="fashion">fashion</option>
-        <option value="sports">Sports</option>
-      </select><br>
-      <input class="form-control me-2" type="text" name="title" placeholder="title" aria-label="Search" />
-      
-      <div class="action">
-        <button type="submit" class="btn btn-outline-secondary"> Search</button>
-      </div>
-    </form>
-  </section>
+        <div class="action">
+          <button type="submit" class="btn btn-outline-secondary">
+            Search
+          </button>
+        </div>
+      </form>
+    </section>
 
-  <main>
-    <% resources.forEach(resource=> {%>
+    <main>
+      <% resources.forEach(resource=> {%>
       <section class="resources">
         <div class="head">
-          <div class="title_and_catagory"><strong>Title : <%= resource.title%></strong><br>
-            <div class="resource_category"><%= resource.category%></div> 
+          <div class="title_and_catagory">
+            <strong>Title : <%= resource.title%></strong><br />
+            <div class="resource_category"><%= resource.category%></div>
           </div>
-          <div class="creator"><span class="fa-solid fa-circle-user"></span>&nbsp;<strong><%= resource.name%></strong></div>
+          <div class="creator">
+            <span class="fa-solid fa-circle-user"></span>&nbsp;<strong
+              ><%= resource.name%></strong
+            >
+          </div>
         </div>
 
-        <div class="description"><a href="<%= resource.resource_link%>"><%= resource.description%></a></div>
+        <div class="description">
+          <a href="<%= resource.resource_link%>"><%= resource.description%></a>
+        </div>
 
         <div class="feedback">
           <div class="feedback-display">
@@ -71,30 +98,50 @@
           </div>
 
           <div class="feedback-action">
-            <div class='rating-stars text-center'>
-              <ul class='the-stars'>
-                <li class='star' title='Poor' data-value='1'><i class='fa fa-star fa-fw'></i></li>
-                <li class='star' title='Fair' data-value='2'><i class='fa fa-star fa-fw'></i></li>
-                <li class='star' title='Good' data-value='3'><i class='fa fa-star fa-fw'></i></li>
-                <li class='star' title='Excellent' data-value='4'><i class='fa fa-star fa-fw'></i></li>
-                <li class='star' title='Wow!' data-value='5'><i class='fa fa-star fa-fw'></i></li>
+            <div class="rating-stars text-center">
+              <ul class="the-stars">
+                <li class="star" title="Poor" data-value="1">
+                  <i class="fa fa-star fa-fw"></i>
+                </li>
+                <li class="star" title="Fair" data-value="2">
+                  <i class="fa fa-star fa-fw"></i>
+                </li>
+                <li class="star" title="Good" data-value="3">
+                  <i class="fa fa-star fa-fw"></i>
+                </li>
+                <li class="star" title="Excellent" data-value="4">
+                  <i class="fa fa-star fa-fw"></i>
+                </li>
+                <li class="star" title="Wow!" data-value="5">
+                  <i class="fa fa-star fa-fw"></i>
+                </li>
               </ul>
             </div>
 
             <div class="liking-heart">
-              <span class="heart"><i class="fa-regular fa-heart"></i></span>
+              <span data-resource-id="<%= resource.id %>" class="heart"
+                ><i class="fa-regular fa-heart"></i
+              ></span>
             </div>
           </div>
         </div>
 
         <div class="comment-layout">
           <div class="new-comment">
-
             <div class="form-error"></div>
 
-            <form action="#" method="post" class="get-comment" data-resource-id="<%= resource.id %>">
-              <textarea name="comment" class="comment-text" placeholder="What are you thinking about?"
-                data-maxlength="140"></textarea>
+            <form
+              action="#"
+              method="post"
+              class="get-comment"
+              data-resource-id="<%= resource.id %>"
+            >
+              <textarea
+                name="comment"
+                class="comment-text"
+                placeholder="What are you thinking about?"
+                data-maxlength="140"
+              ></textarea>
 
               <div class="button-and-counter">
                 <button id="comment" type="submit">Comment</button>
@@ -103,11 +150,14 @@
           </div>
 
           <!--//identifying the dynamically created elements, using the resource id. ensures the right comments are appended to the right posts.-->
-          <div class="comment-listing" id="comment-listing-<%= resource.id %>" data-resource-id="<%= resource.id %>"></div>
+          <div
+            class="comment-listing"
+            id="comment-listing-<%= resource.id %>"
+            data-resource-id="<%= resource.id %>"
+          ></div>
         </div>
       </section>
       <% });%>
-  </main>
-</body>
-
+    </main>
+  </body>
 </html>

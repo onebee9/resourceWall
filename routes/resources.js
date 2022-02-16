@@ -23,7 +23,38 @@ module.exports = (db) => {
       .then((data) => {
         const newResource = data.rows;
         // res.send({ newResource });
-        res.redirect('/resources');
+        res.redirect("/resources");
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.post("/likes", (req, res) => {
+    const userID = req.session.user_id;
+    //console.log(req.body.id);
+    const queryString = `INSERT INTO likes(
+    user_id,
+    resource_id,
+    resource_like) VALUES ($1, $2, $3) RETURNING *`;
+
+    const values = [userID, req.body.postID, true];
+
+    db.query(queryString, values)
+      .then((data) => {
+        data.rows;
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.get("/likes", (req, res) => {
+    db.query(
+      `SELECT likes.*, users.name FROM likes JOIN users ON users.id = likes.user_id`
+    )
+      .then((data) => {
+        res.json(data.rows);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -37,17 +68,13 @@ module.exports = (db) => {
       resource_id,
       comment) VALUES ($1,$2,$3) RETURNING *;`;
 
-    const values = [
-      userID, 
-      req.body.postID,
-      req.body.comment,
-    ];
+    const values = [userID, req.body.postID, req.body.comment];
 
     db.query(queryString, values)
       .then((data) => {
         const newResource = data.rows;
         // res.send({ newResource });
-        res.redirect('/resources');
+        res.redirect("/resources");
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -55,8 +82,10 @@ module.exports = (db) => {
   });
 
   router.get("/comments", (req, res) => {
-    db.query(`SELECT comments.*, users.name FROM comments JOIN Users ON users.id = comments.user_id;`)
-      .then(data => {
+    db.query(
+      `SELECT comments.*, users.name FROM comments JOIN Users ON users.id = comments.user_id;`
+    )
+      .then((data) => {
         res.json(data.rows);
       })
       .catch((err) => {
@@ -67,8 +96,8 @@ module.exports = (db) => {
   router.get("/comments/:postID", (req, res) => {
     const value = req.params.postID;
     const queryString = `SELECT comments.*, users.name FROM comments JOIN Users ON users.id = comments.user_id WHERE comments.resource_id = $1 ;`;
-    db.query(queryString,[value])
-      .then(data => {
+    db.query(queryString, [value])
+      .then((data) => {
         res.json(data.rows);
       })
       .catch((err) => {
@@ -107,18 +136,21 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/", (req, res) => { 
-    db.query(`SELECT resources.*, users.name FROM resources JOIN Users ON users.id = resources.user_id;`)
-      .then(data => {
+  router.get("/", (req, res) => {
+    db.query(
+      `SELECT resources.*, users.name FROM resources JOIN Users ON users.id = resources.user_id;`
+    )
+      .then((data) => {
         const resources = data.rows;
-        res.render('resources', { resources });
+        res.render("resources", { resources });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
 
-  router.get("/new", (req, res) => {// makes a request to localhost:3000/resources/new
+  router.get("/new", (req, res) => {
+    // makes a request to localhost:3000/resources/new
     const id = req.session.user_id;
     if (id) {
       res.render("create_resource");

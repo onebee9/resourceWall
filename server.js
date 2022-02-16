@@ -7,7 +7,7 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-const cookieSession = require('cookie-session');
+const cookieSession = require("cookie-session");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -19,10 +19,12 @@ db.connect();
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
-app.use(cookieSession({
-  name: 'session',
-  keys: ['key1']
-}));
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1"],
+  })
+);
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -43,6 +45,7 @@ app.use(express.static("public"));
 // For rendering dynamic files with data from the database
 const resourcesRoute = require("./routes/resources");
 const usersRoute = require("./routes/users");
+
 // const widgetsRoutes = require("./routes/widgets");
 
 // Mount all resource routes
@@ -58,7 +61,8 @@ app.use("/resources", resourcesRoute(db));
 // Separate them into separate routes files (see above).
 // For rendering static files only
 
-app.get("/", (req, res) => { // makes a request to localhost:3000
+app.get("/", (req, res) => {
+  // makes a request to localhost:3000
   res.redirect("/users/login");
 });
 app.listen(PORT, () => {
