@@ -35,7 +35,7 @@
 
 <body>
   <section name="search">
-    <form class="form-inline" method="post" action="/api/resources/searchResults">
+    <form class="form-inline" method="post" action="/resources/searchResults">
       <select class="form-select" name="category">
         <option value="boxing">Boxing</option>
         <option value="news">News</option>
@@ -111,7 +111,7 @@
         <div class="coment-bottom bg-white p-2 px-4">
 
           <div class="create-comment">
-            <form class="form-inline" method="post" action="/api/resources/comments">
+            <form class="form-inline" method="post" action="/resources/comments">
               <input type="hidden" name="postID" value="<%= resource.id %>" />
               <input type="text" name ="comment" class="form-control mr-3" placeholder="Add comment">
               <button class="btn btn-primary" type="submit">Comment</button>

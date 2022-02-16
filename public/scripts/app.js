@@ -33,7 +33,7 @@ $(document).ready(function () {
 
     //sends comment to post route for processing + saving
     $.ajax({
-      url: "/api/resources/comments",
+      url: "/resources/comments",
       method: "POST",
       data: formData,
       success: function (response) {
@@ -52,7 +52,7 @@ $(document).ready(function () {
   // makes a request to the get route to retrieve all comments
   const loadComments = function (resourceid) {
     $.ajax({
-      url: `/api/resources/comments/${resourceid}`,
+      url: `/resources/comments/${resourceid}`,
       method: "GET",
       success: function (data) {
         for (let i = data.length - 1; i >= 0; i--) {
