@@ -26,17 +26,18 @@
 
   <!-- App Style -->
 
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/main.css" type="text/css">
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
 <body>
-  <section name="search">
+ 
+  <section class="search">
     <form class="form-inline" method="post" action="/resources/searchResults">
-      <select class="form-select" name="category">
+      <select class="form-select" name="category" placeholder="Select category">
+        <option>Select category</option>
         <option value="boxing">Boxing</option>
         <option value="news">News</option>
         <option value="creative">Creative</option>
@@ -44,44 +45,45 @@
         <option value="sports">Sports</option>
       </select><br>
       <input class="form-control me-2" type="text" name="title" placeholder="title" aria-label="Search" />
-      <button type="submit" class="btn btn-outline-secondary"> Search</button>
+      
+      <div class="action">
+        <button type="submit" class="btn btn-outline-secondary"> Search</button>
+      </div>
     </form>
   </section>
+
   <main>
     <% resources.forEach(resource=> {%>
-      <section class="resources" style="display: flex; flex-direction: row;">
+      <section class="resources">
         <div class="head">
-          <div class="title_and_catagory">
-            <p>
-              <%= resource.title%>
-            </p>
-            <p>
-              <%= resource.category%>
-            </p>
+          <div class="title_and_catagory"><strong>Title : <%= resource.title%></strong><br>
+            <div class="resource_category"><%= resource.category%></div> 
           </div>
-          <div class="creator">
-            <p>Resource By : <%= resource.name%>
-            </p>
-            <div class="user">
-              <i class="fa-solid fa-circle-user"></i>
+          <div class="creator"><span class="fa-solid fa-circle-user"></span>&nbsp;<strong><%= resource.name%></strong></div>
+        </div>
+
+        <div class="description"><a href="<%= resource.resource_link%>"><%= resource.description%></a></div>
+
+        <div class="feedback">
+          <div class="feedback-display">
+            <span><i class="fa-regular fa-star"></i>&nbsp;<span>4</span></span>
+            <span><i class="fa-regular fa-heart"></i>&nbsp;<span>4</span></span>
+          </div>
+
+          <div class="feedback-action">
+            <div class='rating-stars text-center'>
+              <ul class='the-stars'>
+                <li class='star' title='Poor' data-value='1'><i class='fa fa-star fa-fw'></i></li>
+                <li class='star' title='Fair' data-value='2'><i class='fa fa-star fa-fw'></i></li>
+                <li class='star' title='Good' data-value='3'><i class='fa fa-star fa-fw'></i></li>
+                <li class='star' title='Excellent' data-value='4'><i class='fa fa-star fa-fw'></i></li>
+                <li class='star' title='Wow!' data-value='5'><i class='fa fa-star fa-fw'></i></li>
+              </ul>
             </div>
-          </div>
-        </div>
-        <div class="description">
-          <div class="description-text">
-            <p>
-              <%= resource.description%>
-            </p>
-          </div>
-          <div class="image">
-            <i class="fa-regular fa-image"></i>
-          </div>
-        </div>
-        <div class="rating">
-          <p>*****</p>
-          <div class="likes">
-            <i class="fa-regular fa-heart"></i>
-            <p>4</p>
+
+            <div class="liking-heart">
+              <span class="heart"><i class="fa-regular fa-heart"></i></span>
+            </div>
           </div>
         </div>
 
@@ -96,7 +98,6 @@
 
               <div class="button-and-counter">
                 <button id="comment" type="submit">Comment</button>
-                <output name="counter" class="counter" for="comment-text">140</output>
               </div>
             </form>
           </div>
@@ -105,39 +106,6 @@
           <div class="comment-listing" id="comment-listing-<%= resource.id %>" data-resource-id="<%= resource.id %>"></div>
         </div>
       </section>
-
-      <!--  <div class="comments">
-
-        <div class="coment-bottom bg-white p-2 px-4">
-
-          <div class="create-comment">
-            <form class="form-inline" method="post" action="/resources/comments">
-              <input type="hidden" name="postID" value="<%= resource.id %>" />
-              <input type="text" name ="comment" class="form-control mr-3" placeholder="Add comment">
-              <button class="btn btn-primary" type="submit">Comment</button>
-            </form>
-          </div>
-
-          <div class="commented-section mt-2">
-            <div class="show-comment">
-
-              <div class="d-flex flex-row align-items-center commented-user">
-                <h5 class="mr-2">username </h5>
-                <span class="mb-1 ml-2">4 hours ago</span>
-              </div>
-
-              <div class="comment-text-sm">
-                <span>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>-->
       <% });%>
   </main>
 </body>

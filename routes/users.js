@@ -31,6 +31,9 @@ module.exports = (db) => {
           if (data.rows[0]) {
             console.log(data.rows);
             req.session.user_id = data.rows[0].id;
+            req.session.name = data.rows[0].name;
+            req.session.email = data.rows[0].email;
+            
             res.redirect("/users/profile");
           } else{
             res.send('You must enter a valid username and password!');
@@ -44,14 +47,13 @@ module.exports = (db) => {
 
   router.get("/profile", (req, res) => {
     const userId = req.session.user_id;
-    console.log(userId);
 
     if (!userId) {
       res.send({ message: "not logged in" });
       return;
     }
 
-    const queryString = `SELECT * FROM resources
+    const queryString = `SELECT resources.*, users.* FROM resources JOIN users ON users.id = resources.user_id
     WHERE user_id = $1`;
 
     db.query(queryString, [userId])

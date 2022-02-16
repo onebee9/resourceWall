@@ -35,43 +35,22 @@
 
 <body>
   <section name="search">
-    <h1>Profile Page</h1>
+    <h3>Profile Page</h3>
   </section>
   <main>
     <% resources.forEach(resource=> {%>
-      <section class="resources" style="display: flex; flex-direction: row;">
+      <section class="resources">
         <div class="head">
-          <div class="title_and_catagory">
-            <p>
-              <%= resource.title%>
-            </p>
-            <p>
-              <%= resource.category%>
-            </p>
-          </div>
-          <div class="creator">
-            <p>Resource By : <%= resource.name%>
-            </p>
-            <div class="user">
-              <i class="fa-solid fa-circle-user"></i>
-            </div>
-          </div>
+          <div class="title_and_catagory"><strong>Title : <%= resource.title%></strong><br>Category : <%= resource.category%></div>
+          <div class="creator"><span class="fa-solid fa-circle-user"></span>&nbsp;<strong><%= resource.name%></strong></div>
         </div>
-        <div class="description">
-          <div class="description-text">
-            <p>
-              <%= resource.description%>
-            </p>
-          </div>
-          <div class="image">
-            <i class="fa-regular fa-image"></i>
-          </div>
-        </div>
-        <div class="rating">
-          <p>*****</p>
-          <div class="likes">
-            <i class="fa-regular fa-heart"></i>
-            <p>4</p>
+
+        <div class="description"><a href="<%= resource.resource_link%>"><%= resource.description%></a></div>
+
+        <div class="feedback">
+          <div class="feedback-display">
+            <span><i class="fa-regular fa-star"></i>&nbsp;<span>4</span></span>
+            <span><i class="fa-regular fa-heart"></i>&nbsp;<span>4</span></span>
           </div>
         </div>
       </section>

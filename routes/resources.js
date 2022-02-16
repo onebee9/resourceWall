@@ -40,7 +40,7 @@ module.exports = (db) => {
       comment) VALUES ($1,$2,$3) RETURNING *;`;
 
     const values = [
-      userID, //need to replace this with user id from the cookie
+      userID, 
       req.body.postID,
       req.body.comment,
     ];
@@ -137,16 +137,12 @@ module.exports = (db) => {
   });
 
   router.get("/new", (req, res) => {// makes a request to localhost:3000/resources/new
-    // const id = req.session.user_id;
-    // if (id) {
-    //   const templateVars = {
-    //     user: users[id]
-    //   };
-    //   res.render("urls_new", templateVars);
-    // } else {
-    //   res.redirect("/login");
-    // }
-    res.render("create_resource");
+    const id = req.session.user_id;
+    if (id) {
+      res.render("create_resource");
+    } else {
+      res.redirect("/users/login");
+    }
   });
 
   return router;
