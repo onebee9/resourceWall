@@ -312,7 +312,9 @@ $(document).ready(function () {
     });
 
   /* 2. Action to perform on click */
-  $(".the-stars li").on("click", function () {
+  $(".the-stars li").on("click", function (e) {
+    e.preventDefault();
+
     let onStar = parseInt($(this).data("value"), 10); // The star currently selected
     let stars = $(this).parent().children("li.star");
 
@@ -323,6 +325,18 @@ $(document).ready(function () {
     for (i = 0; i < onStar; i++) {
       $(stars[i]).addClass("selected");
     }
+
+    const rating = $(this).attr("data-value");
+    const id = $(this).parent().attr("data-resource-id");
+
+    $.ajax({
+      url: "/resources/ratings",
+      method: "POST",
+      data: { rating: rating, postID: id },
+      success: function (response) {
+        console.log("Success");
+      },
+    });
   });
 
   // resource like icon event handling
