@@ -44,10 +44,11 @@
 
   <body>
     <section name="search">
-      <h3>Profile Page</h3>
+      <h3 style="text-align: center;">My resources</h3>
     </section>
     <main>
-      <% resources.forEach(resource=> {%>
+      <h4>My Posts</h4>
+      <% results.myPosts.forEach(resource=> {%>  
       <section class="resources">
         <div class="head">
           <div class="title_and_catagory">
@@ -73,6 +74,32 @@
         </div>
       </section>
       <% });%>
+      <h4>Liked Posts</h4>
+      <% results.myLikedPosts.forEach(resource => {%>
+        <section class="resources">
+          <div class="head">
+            <div class="title_and_catagory">
+              <strong>Title : <%= resource.title%></strong><br />Category : <%=
+              resource.category%>
+            </div>
+            <div class="creator">
+              <span class="fa-solid fa-circle-user"></span>&nbsp;<strong
+                ><%= resource.name%></strong>
+            </div>
+          </div>
+  
+          <div class="description">
+            <a href="<%= resource.resource_link%>"><%= resource.description%></a>
+          </div>
+  
+          <div class="feedback">
+            <div class="feedback-display">
+              <span><i class="fa-regular fa-star"></i>&nbsp;<span>4</span></span>
+              <span><i class="fa-regular fa-heart"></i>&nbsp;<span>4</span></span>
+            </div>
+          </div>
+        </section>
+        <% });%>
     </main>
   </body>
 </html>
