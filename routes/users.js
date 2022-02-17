@@ -50,21 +50,35 @@ module.exports = (db) => {
       return;
     }
 
-    const queryString = `SELECT resources.*, users.*, likes.*
+    const ownerResourcesQueryString = `SELECT resources.*, users.name
     FROM resources
-    JOIN users ON users.id = resources.user_id
-    JOIN likes ON likes.id = likes.user_id
-    WHERE users.id = $1 OR likes.resource_like = true
-    GROUP BY resources.id, users.id`;
+    LEFT JOIN users ON resources.user_id = users.id
+    WHERE resources.user_id = $1`;
 
-    db.query(queryString, [userId])
-      .then((data) => {
-        const resources = data.rows;
-        res.render("profile", { resources });
+    const likedResourcesQueryString =`SELECT resources.*, users.name
+    FROM resources
+    LEFT JOIN likes ON resources.id = likes.resource_id
+    LEFT JOIN users ON resources.user_id = users.id
+    WHERE likes.user_id = $1 AND likes.resource_like = true`;
+    
+    let results = {};
+    db.query(ownerResourcesQueryString, [userId])
+      .then((myPostdata) => {
+        results['myPosts'] = myPostdata.rows;
+      })
+      .then(()=>{
+        db.query(likedResourcesQueryString,[userId])
+          .then((likeData) => {
+            results['myLikedPosts'] = likeData.rows;
+            console.log(results);
+            console.log(userId);
+            res.render("profile", { results });
+          })
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
+     
   });
 
   router.get("/logout", (req, res) => {
