@@ -328,7 +328,7 @@ $(document).ready(function () {
 
     const rating = $(this).attr("data-value");
     const id = $(this).parent().attr("data-resource-id");
-    console.log(id);
+
     $.ajax({
       url: "/resources/ratings",
       method: "POST",

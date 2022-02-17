@@ -71,8 +71,6 @@ module.exports = (db) => {
 
     const values = [userID, req.body.postID, req.body.rating];
 
-    console.log(values);
-
     db.query(queryString, values)
       .then((data) => {
         data.rows;
