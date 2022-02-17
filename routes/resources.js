@@ -61,6 +61,39 @@ module.exports = (db) => {
       });
   });
 
+  router.post("/ratings", (req, res) => {
+    const userID = req.session.user_id;
+    const queryString = `INSERT INTO ratings(
+      user_id,
+      resource_id,
+      rating
+    ) VALUES ($1, $2, $3) RETURNING *`;
+
+    const values = [userID, req.body.postID, req.body.rating];
+
+    console.log(values);
+
+    db.query(queryString, values)
+      .then((data) => {
+        data.rows;
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.get("/ratings", (req, res) => {
+    db.query(
+      `SELECT ratings.*, users.name FROM ratings JOIN users ON users.id = ratings.user_id`
+    )
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   router.post("/comments", (req, res) => {
     const userID = req.session.user_id;
     const queryString = `INSERT INTO comments(
