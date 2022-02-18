@@ -75,10 +75,10 @@
 
     <main>
       <% resources.forEach(resource=> {%>
-      <section class="resources">
+      <section class="resources" data-resource-id="<%= resource.id %>">
         <div class="head">
           <div class="title_and_catagory">
-            <strong>Title : <%= resource.title%></strong><br />
+            <strong> <%= resource.title%></strong><br />
             <div class="resource_category"><%= resource.category%></div>
           </div>
           <div class="creator">
@@ -89,7 +89,9 @@
         </div>
 
         <div class="description">
-          <a href="<%= resource.resource_link%>"><%= resource.description%></a>
+          <%= resource.description%>
+          <br>
+          <a href="<%= resource.resource_link%>"><em>Read more&hellip;</em></a>
         </div>
 
         <div class="feedback">
@@ -120,9 +122,7 @@
             </div>
 
             <div class="liking-heart">
-              <span data-resource-id="<%= resource.id %>" class="heart"
-                ><i class="fa-regular fa-heart"></i
-              ></span>
+              <span data-resource-id="<%= resource.id %>" class="heart"><i class="fa-regular fa-heart"></i></span>
             </div>
           </div>
         </div>
