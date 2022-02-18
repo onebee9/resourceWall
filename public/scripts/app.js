@@ -318,14 +318,6 @@ $(document).ready(function () {
     let onStar = parseInt($(this).data("value"), 10); // The star currently selected
     let stars = $(this).parent().children("li.star");
 
-    for (i = 0; i < stars.length; i++) {
-      $(stars[i]).removeClass("selected");
-    }
-
-    for (i = 0; i < onStar; i++) {
-      $(stars[i]).addClass("selected");
-    }
-
     const rating = $(this).attr("data-value");
     const id = $(this).parent().attr("data-resource-id");
 
@@ -334,7 +326,37 @@ $(document).ready(function () {
       method: "POST",
       data: { rating: rating, postID: id },
       success: function (response) {
-        console.log("Success");
+        for (i = 0; i < stars.length; i++) {
+          $(stars[i]).removeClass("selected");
+        }
+        for (i = 0; i < onStar; i++) {
+          $(stars[i]).addClass("selected");
+        }
+      },
+    });
+  });
+
+ $(".resources").each(function(){
+    let $resource = $(this);
+    let resourceid = $resource.data('resource-id');
+    let $stars = $resource.find("li.star");
+
+    $.ajax({
+      url: `/resources/ratings/${resourceid}`,
+      method: "GET",
+      success: function(data){
+        let starnumber = parseInt(data, 10);
+        if(starnumber > 0){
+          for (i = 0; i < starnumber; i++) {
+            $($stars[i]).addClass("selected");
+          }
+        }
+        else {
+          $stars.removeClass("selected");
+        }
+      },
+      error: function (data) {
+        console.log(data);
       },
     });
   });
@@ -342,29 +364,58 @@ $(document).ready(function () {
   // resource like icon event handling
   $(".heart").on("click", function (e) {
     e.preventDefault();
+    let $heart = $(this);
+    const id = $heart.attr("data-resource-id");
 
-    const id = $(this).attr("data-resource-id");
+    //deletes like entry 
+    if ($heart.hasClass("liked")) {
+        $.ajax({
+          url: "/resources/likes/delete",
+          method: "POST",
+          data: { postID: id},
+          success: function (response) {
+            $heart.removeClass("liked");
+            $heart.find('i').removeClass('fa').addClass('fa-regular');
+          },
+      });
 
-    $.ajax({
-      url: "/resources/likes",
-      method: "POST",
-      data: { postID: id },
-      success: function (response) {
-        console.log("Success");
-      },
-    });
-
-    if ($(this).hasClass("liked")) {
-      $(this).html('<i class="fa-regular fa-heart"></i>');
-      $(this).removeClass("liked");
+    //creates like entry and sets to true
     } else {
-      $(this).html('<i class="fa fa-heart"></i>');
-      $(this).addClass("liked");
+      $.ajax({
+        url: "/resources/likes",
+        method: "POST",
+        data: { postID: id, status:true},
+        success: function (response) {
+          console.log("Success 2");
+          $heart.addClass("liked");
+          $heart.find('i').removeClass('fa-regular').addClass('fa');
+        },
+      });
       // removing it from the db
     }
   });
 
   // append like to the profile page
-});
+  $(".resources").each(function(){
+    let $resource = $(this);
+    let resourceid = $resource.data('resource-id');
 
-// on the proflie page, get all the liked resources that match the user id
+    $.ajax({
+      url: `/resources/likes/${resourceid}`,
+      method: "GET",
+      success: function(data){
+        if(data.status == "found"){
+          $resource.find('.heart i').removeClass('fa-regular').addClass('fa');
+        }
+
+        else{
+          $resource.find('.heart i').removeClass('fa').addClass('fa-regular');
+        }
+      },
+      error: function (data) {
+        console.log(data);
+      },
+    });
+  });
+
+});
