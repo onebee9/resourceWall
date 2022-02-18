@@ -8,5 +8,5 @@ CREATE TABLE resources (
   description TEXT,
   category VARCHAR(255) NOT NULL,
   resource_link VARCHAR(255) NOT NULL,
-  created_at TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

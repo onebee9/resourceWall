@@ -63,19 +63,19 @@ module.exports = (db) => {
 
     let queryString = `SELECT resources.*, users.name FROM resources JOIN Users ON users.id =
       resources.user_id WHERE resources.id IS NOT NULL `;
-  
+
     //validate that search queries exist and then add on to the query
     if (!req.body.title == "") {
       queryParams.push(`%${req.body.title}%`);
       queryString += ` AND resources.title LIKE $${queryParams.length} `;
     }
-  
+
     if (!req.body.category == "") {
       queryParams.push(req.body.category);
       queryString += `AND resources.category = $${queryParams.length} `;
     }
     queryString += `GROUP BY resources.id, users.name ;`;
-  
+
     db.query(queryString, queryParams)
       .then((data) => {
         if (data) {
@@ -96,9 +96,9 @@ module.exports = (db) => {
         user_id,
         resource_id,
         comment) VALUES ($1,$2,$3) RETURNING *;`;
-  
+
     const values = [userID, req.body.postID, req.body.comment];
-  
+
     db.query(queryString, values)
       .then((data) => {
         const newResource = data.rows;
@@ -173,7 +173,7 @@ module.exports = (db) => {
     const userID = req.session.user_id;
     const queryString = `DELETE FROM ratings 
       WHERE user_id = $1 AND resource_id = $2;`;
-  
+
     const values = [userID, req.body.postID];
     db.query(queryString, values)
       .then((data) => {
@@ -191,7 +191,7 @@ module.exports = (db) => {
   /*Post routes end*/
 
   /*Get routes start*/
-  
+
   router.get("/new", (req, res) => {
     // makes a request to localhost:3000/resources/new
     const id = req.session.user_id;
@@ -213,10 +213,10 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-  
+
   router.get("/comments/:postID", (req, res) => {
     const value = req.params.postID;
-    const queryString = `SELECT comments.*, users.name FROM comments JOIN Users ON users.id = comments.user_id WHERE comments.resource_id = $1 ;`;
+    const queryString = `SELECT comments.*, users.name FROM comments JOIN Users ON users.id = comments.user_id WHERE comments.resource_id = $1 order by comments.created_at desc; `;
     db.query(queryString, [value])
       .then((data) => {
         res.json(data.rows);
@@ -253,7 +253,7 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
- 
+
 
   router.get("/ratings", (req, res) => {
     db.query(
@@ -287,11 +287,11 @@ module.exports = (db) => {
         }
       })
       .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
-});
+        res.status(500).json({ error: err.message });
+      });
+  });
 
-return router;
+  return router;
 };
 
-/*Get routes start*/
+/*Get routes end*/
