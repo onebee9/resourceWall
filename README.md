@@ -15,3 +15,8 @@ This is our Pintrest clone which will allow users to do the following:
 * Users are able to view all their own and all liked resources on one page ("My resources")
 * Users are able to register, log in, log out and update their profile
 
+
+## Dependencies
+* Node 10.x or above
+* NPM 5.x or above
+* PG 6.x
