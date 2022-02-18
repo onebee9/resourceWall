@@ -11,19 +11,19 @@
   "function" == typeof define && define.amd
     ? define(["jquery"], t)
     : "object" == typeof module && "object" == typeof module.exports
-    ? t(require("jquery"))
-    : t(jQuery);
+      ? t(require("jquery"))
+      : t(jQuery);
 })(function (t) {
   t.timeago = function (e) {
     return e instanceof Date
       ? n(e)
       : n(
-          "string" == typeof e
-            ? t.timeago.parse(e)
-            : "number" == typeof e
+        "string" == typeof e
+          ? t.timeago.parse(e)
+          : "number" == typeof e
             ? new Date(e)
             : t.timeago.datetime(e)
-        );
+      );
   };
   var e = t.timeago;
   t.extend(t.timeago, {
@@ -65,7 +65,7 @@
         (this.settings.allowFuture &&
           e < 0 &&
           ((a = i.prefixFromNow), (n = i.suffixFromNow)),
-        !this.settings.allowPast && e >= 0)
+          !this.settings.allowPast && e >= 0)
       )
         return this.settings.strings.inPast;
       var r = Math.abs(e) / 1e3,
@@ -79,17 +79,17 @@
         return r.replace(/%d/i, o);
       }
       var d =
-          (r < 45 && l(i.seconds, Math.round(r))) ||
-          (r < 90 && l(i.minute, 1)) ||
-          (o < 45 && l(i.minutes, Math.round(o))) ||
-          (o < 90 && l(i.hour, 1)) ||
-          (s < 24 && l(i.hours, Math.round(s))) ||
-          (s < 42 && l(i.day, 1)) ||
-          (u < 30 && l(i.days, Math.round(u))) ||
-          (u < 45 && l(i.month, 1)) ||
-          (u < 365 && l(i.months, Math.round(u / 30))) ||
-          (m < 1.5 && l(i.year, 1)) ||
-          l(i.years, Math.round(m)),
+        (r < 45 && l(i.seconds, Math.round(r))) ||
+        (r < 90 && l(i.minute, 1)) ||
+        (o < 45 && l(i.minutes, Math.round(o))) ||
+        (o < 90 && l(i.hour, 1)) ||
+        (s < 24 && l(i.hours, Math.round(s))) ||
+        (s < 42 && l(i.day, 1)) ||
+        (u < 30 && l(i.days, Math.round(u))) ||
+        (u < 45 && l(i.month, 1)) ||
+        (u < 365 && l(i.months, Math.round(u / 30))) ||
+        (m < 1.5 && l(i.year, 1)) ||
+        l(i.years, Math.round(m)),
         h = i.wordSeparator || "";
       return void 0 === i.wordSeparator && (h = " "), t.trim([a, d, n].join(h));
     },
@@ -101,9 +101,9 @@
           .replace(/-/, "/"))
           .replace(/T/, " ")
           .replace(/Z/, " UTC")).replace(
-          /([\+\-]\d\d)\:?(\d\d)/,
-          " $1$2"
-        )).replace(/([\+\-]\d\d)$/, " $100")),
+            /([\+\-]\d\d)\:?(\d\d)/,
+            " $1$2"
+          )).replace(/([\+\-]\d\d)$/, " $100")),
         new Date(i)
       );
     },
@@ -141,7 +141,7 @@
     dispose: function () {
       this._timeagoInterval &&
         (window.clearInterval(this._timeagoInterval),
-        (this._timeagoInterval = null));
+          (this._timeagoInterval = null));
     },
   };
   function a() {
@@ -155,17 +155,17 @@
         e.settings.localeTitle
           ? i.attr("title", i.data("timeago").datetime.toLocaleString())
           : !(a.length > 0) ||
-            (e.isTime(i) && i.attr("title")) ||
-            i.attr("title", a);
+          (e.isTime(i) && i.attr("title")) ||
+          i.attr("title", a);
       }
       return i.data("timeago");
     })(this);
     return (
       isNaN(a.datetime) ||
-        (0 === i.cutoff || Math.abs(r(a.datetime)) < i.cutoff
-          ? t(this).text(n(a.datetime))
-          : t(this).attr("title").length > 0 &&
-            t(this).text(t(this).attr("title"))),
+      (0 === i.cutoff || Math.abs(r(a.datetime)) < i.cutoff
+        ? t(this).text(n(a.datetime))
+        : t(this).attr("title").length > 0 &&
+        t(this).text(t(this).attr("title"))),
       this
     );
   }
@@ -227,7 +227,7 @@ $(document).ready(function () {
 
         loadComments(resourceid);
       },
-      error: function (response) {},
+      error: function (response) { },
     });
   });
 
@@ -275,11 +275,8 @@ $(document).ready(function () {
       <p>${commentData.comment}</p>
     </article>`;
 
-    // if (commentData.comment == "" ) {
-    //   comment = "<p><em>No comments added yet.<br>Be the first to comment!</em></p>";
-    // }
     //Appends the contents to dynamically created elements, ensures the right comments are appended to the right posts.
-    $("#comment-listing-" + resourceid).append(comment);
+    $("#comment-listing-" + resourceid).prepend(comment);
     $("time.commentdate").timeago();
   };
 
@@ -336,7 +333,7 @@ $(document).ready(function () {
     });
   });
 
- $(".resources").each(function(){
+  $(".resources").each(function () {
     let $resource = $(this);
     let resourceid = $resource.data('resource-id');
     let $stars = $resource.find("li.star");
@@ -344,9 +341,9 @@ $(document).ready(function () {
     $.ajax({
       url: `/resources/ratings/${resourceid}`,
       method: "GET",
-      success: function(data){
+      success: function (data) {
         let starnumber = parseInt(data, 10);
-        if(starnumber > 0){
+        if (starnumber > 0) {
           for (i = 0; i < starnumber; i++) {
             $($stars[i]).addClass("selected");
           }
@@ -369,22 +366,22 @@ $(document).ready(function () {
 
     //deletes like entry 
     if ($heart.hasClass("liked")) {
-        $.ajax({
-          url: "/resources/likes/delete",
-          method: "POST",
-          data: { postID: id},
-          success: function (response) {
-            $heart.removeClass("liked");
-            $heart.find('i').removeClass('fa').addClass('fa-regular');
-          },
+      $.ajax({
+        url: "/resources/likes/delete",
+        method: "POST",
+        data: { postID: id },
+        success: function (response) {
+          $heart.removeClass("liked");
+          $heart.find('i').removeClass('fa').addClass('fa-regular');
+        },
       });
 
-    //creates like entry and sets to true
+      //creates like entry and sets to true
     } else {
       $.ajax({
         url: "/resources/likes",
         method: "POST",
-        data: { postID: id, status:true},
+        data: { postID: id, status: true },
         success: function (response) {
           console.log("Success 2");
           $heart.addClass("liked");
@@ -396,19 +393,19 @@ $(document).ready(function () {
   });
 
   // append like to the profile page
-  $(".resources").each(function(){
+  $(".resources").each(function () {
     let $resource = $(this);
     let resourceid = $resource.data('resource-id');
 
     $.ajax({
       url: `/resources/likes/${resourceid}`,
       method: "GET",
-      success: function(data){
-        if(data.status == "found"){
+      success: function (data) {
+        if (data.status == "found") {
           $resource.find('.heart i').removeClass('fa-regular').addClass('fa');
         }
 
-        else{
+        else {
           $resource.find('.heart i').removeClass('fa').addClass('fa-regular');
         }
       },
