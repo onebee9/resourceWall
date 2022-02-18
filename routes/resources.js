@@ -48,6 +48,19 @@ module.exports = (db) => {
 
   router.post("/searchResults", (req, res) => {
     const queryParams = [];
+    // function titleCase(city) {
+    //   let citySplit = city.toLowerCase().split(' ');
+    //   for (let i = 0; i < citySplit.length; i++) {
+    //     citySplit[i] = citySplit[i].charAt(0).toUpperCase() + citySplit[i].substring(1);
+    //   }
+    //   return citySplit.join(' ');
+    // }
+    // const title = titleCase(req.body.title);
+    // const title = titleCase(req.body.title);
+
+    console.log(req.body.category);
+    console.log(req.body.title);
+
     let queryString = `SELECT resources.*, users.name FROM resources JOIN Users ON users.id =
       resources.user_id WHERE resources.id IS NOT NULL `;
   
