@@ -4,16 +4,15 @@
 #### By: Ibifuro Odu, Chris Tate & Jimmy Tang
 
 
-This is our Pintrest clone which will allow users to do the following:
+A Pintrest clone where users can do the following:
 
-* Users are able to save an external URL along with a title and description
-* Users are able to search for already-saved resources created by any user
-* Users are able to categorize any resource under a topic
-* Users are able to comment on any resource
-* Users are able to rate any resource
-* Users are able to like any resource
-* Users are able to view all their own and all liked resources on one page ("My resources")
-* Users are able to register, log in, log out and update their profile
+* Save an external URL along with a title and description
+* Search for already-saved resources created by any user
+* Categorize any resource under a topic
+* Comment on any resource
+* Rate any resource
+* Like any resource
+* View all contributed and liked resources on one page ("My resources").
 
 
 ## Dependencies
