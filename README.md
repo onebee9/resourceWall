@@ -43,7 +43,8 @@ The following steps are only for _one_ of the group members to perform.
 - PG 6.x
 
 ## Screenshots
-!["Homepage"](https://github.com/onebee9/scheduler/blob/master/docs/HomePage.png)
-!["User Dashboard"](https://github.com/onebee9/scheduler/blob/master/docs/ErrorState.png)
-!["Comments"](https://github.com/onebee9/scheduler/blob/master/docs/EditAppointments.png)
+!["Homepage"](https://github.com/onebee9/resourceWall/blob/master/Docs/Home%20Page.png)
+!["Resource"](https://github.com/onebee9/resourceWall/blob/master/Docs/Screen%20Shot%202022-04-04%20at%2011.54.39%20AM.png)
+["User Dashboard"](https://github.com/onebee9/resourceWall/blob/master/Docs/My%20resources.png)
+!["Comments"](https://github.com/onebee9/resourceWall/blob/master/Docs/Multiple%20comments%20with%20time.png)
 
