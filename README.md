@@ -13,6 +13,11 @@ A Pintrest clone where users can do the following:
 
 
 ## Dependencies
-* Node 10.x or above
-* NPM 5.x or above
-* PG 6.x
+- Node 10.x or above
+- NPM 5.x or above
+- PG 6.x
+
+## Screenshots
+!["Homepage"](https://github.com/onebee9/scheduler/blob/master/docs/HomePage.png)
+!["User Dashboard"](https://github.com/onebee9/scheduler/blob/master/docs/ErrorState.png)
+!["Comments"](https://github.com/onebee9/scheduler/blob/master/docs/EditAppointments.png)

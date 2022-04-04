@@ -38,8 +38,8 @@
       <form class="form-inline" method="post" action="/resources/searchResults">
         <select class="form-select" name="category" placeholder="Select category">
           <option value="" disabled selected>Select a category</option>
-          <option value="Boxing">Boxing</option>
-          <option value="News">News</option>
+          <option value="boxing">Boxing</option>
+          <option value="news">News</option>
           <option value="creative">Creative</option>
           <option value="fashion">fashion</option>
           <option value="sports">Sports</option>
@@ -61,7 +61,8 @@
             <div class="title_and_catagory">
               <strong>
                 <%= resource.title%>
-              </strong><br />
+              </strong>
+              <br>
               <div class="resource_category">
                 <%= resource.category%>
               </div>
@@ -75,14 +76,13 @@
 
           <div class="description">
             <%= resource.description%>
-              <br>
               <a href="<%= resource.resource_link%>"><em>Read more&hellip;</em></a>
           </div>
 
           <div class="feedback">
             <div class="feedback-display">
-              <span><i class="fa-regular fa-star"></i>&nbsp;<span>4</span></span>
-              <span><i class="fa-regular fa-heart"></i>&nbsp;<span>4</span></span>
+              <span><i class=""></i>&nbsp;<span></span></span>
+              <span><i class=""></i>&nbsp;<span></span></span>
             </div>
 
             <div class="feedback-action">

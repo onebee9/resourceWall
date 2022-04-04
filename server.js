@@ -44,6 +44,7 @@ app.use(express.static("public"));
 const resourcesRoute = require("./routes/resources");
 const usersRoute = require("./routes/users");
 
+
 // Mount all resource routes
 app.use("/users", usersRoute(db));
 app.use("/resources", resourcesRoute(db));

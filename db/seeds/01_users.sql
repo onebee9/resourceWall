@@ -5,5 +5,6 @@ INSERT INTO users (name,email,password) VALUES ('Angus','angus@gmail.com','test'
 INSERT INTO users (name,email,password) VALUES ('Meera','meera@gmail.com','test');
 INSERT INTO users (name,email,password) VALUES ('Tally','tally@gmail.com','test');
 INSERT INTO users (name,email,password) VALUES ('Carl','carl@gmail.com','test');
-
-
+INSERT INTO users (name,email,password) VALUES ('claire','midterms@gmail.com','test');
+INSERT INTO users (name,email,password) VALUES ('sammy','sammy@gmail.com','test');
+INSERT INTO users (name,email,password) VALUES ('chris','chris@gmail.com','test');

@@ -1,10 +1,3 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into /users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
 const express = require("express");
 const router = express.Router();
 
@@ -17,6 +10,7 @@ module.exports = (db) => {
       res.render("login");
     }
   });
+
   router.post("/login", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -55,19 +49,19 @@ module.exports = (db) => {
     LEFT JOIN users ON resources.user_id = users.id
     WHERE resources.user_id = $1`;
 
-    const likedResourcesQueryString =`SELECT resources.*, users.name
+    const likedResourcesQueryString = `SELECT resources.*, users.name
     FROM resources
     LEFT JOIN likes ON resources.id = likes.resource_id
     LEFT JOIN users ON resources.user_id = users.id
     WHERE likes.user_id = $1 AND likes.resource_like = true`;
-    
+
     let results = {};
     db.query(ownerResourcesQueryString, [userId])
       .then((myPostdata) => {
         results['myPosts'] = myPostdata.rows;
       })
-      .then(()=>{
-        db.query(likedResourcesQueryString,[userId])
+      .then(() => {
+        db.query(likedResourcesQueryString, [userId])
           .then((likeData) => {
             results['myLikedPosts'] = likeData.rows;
             console.log(results);
@@ -78,7 +72,7 @@ module.exports = (db) => {
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
-     
+
   });
 
   router.get("/logout", (req, res) => {
@@ -89,5 +83,3 @@ module.exports = (db) => {
 
   return router;
 };
-
-//  likes.*
