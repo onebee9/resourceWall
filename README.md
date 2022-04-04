@@ -41,3 +41,9 @@ The following steps are only for _one_ of the group members to perform.
 - Node 10.x or above
 - NPM 5.x or above
 - PG 6.x
+
+## Screenshots
+!["Homepage"](https://github.com/onebee9/scheduler/blob/master/docs/HomePage.png)
+!["User Dashboard"](https://github.com/onebee9/scheduler/blob/master/docs/ErrorState.png)
+!["Comments"](https://github.com/onebee9/scheduler/blob/master/docs/EditAppointments.png)
+

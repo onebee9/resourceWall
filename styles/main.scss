@@ -1,6 +1,6 @@
 body {background-color: #fafafa; padding:40px;}
 
-section.search{background:#333; color:#fff; padding: 20px; border-radius: 3px; margin-bottom: 20px;}
+section.search{background:rgb(73, 72, 72); color:#fff; padding: 20px; border-radius: 3px; margin-bottom: 20px;}
 section.search .action{text-align: right; margin-top: 15px;}
 section.search .action button{border-radius:3px; color:#111; background: #fff; border: 1px solid #fff; padding: 10px 30px; font-weight: bold;}
 section.search .action button:hover, section.search .action button:active{background: #ddd;}
@@ -8,7 +8,8 @@ section.search .action button:hover, section.search .action button:active{backgr
 .resources{display: flex; flex-direction: column; border: 2px solid #999999; border-radius: 3px; margin-bottom: 15px; padding: 20px;}
 .resources:last-child{margin-bottom: 0;}
 
-.resources .comment-layout{padding: 20px; background: #efefef; border-radius: 3px;}
+
+.resources .resource_category{color: white; padding: 8px; border-radius:5px; background-color: #2196F3; font-size: 14px; display:inline-block; margin-top: 5px; font-weight: 600;}
 
 .resources article{border:1px solid #545149; padding:15px; margin-bottom:20px; border-radius: 3px;}
 .resources article:last-child{margin-bottom:0;}
@@ -21,26 +22,17 @@ section.search .action button:hover, section.search .action button:active{backgr
 
 .resources time{font-size: 14px;}
 
+.resources .comment-layout{padding: 20px; background: #efefef; border-radius: 3px;}
 .resources .new-comment form{margin-bottom:20px}
 .resources .new-comment form .button-and-counter{text-align: right;}
 .resources .new-comment form textarea{width: 100%; min-height: 50px; padding: 15px;}
 
 label{ margin-top: 20px; font-size: 15px;}
-.resource_category{ text-decoration: none;
-  background-color: Orange;
-  color: #333333;
-  padding: 2px 6px 2px 6px;
-  border-top: 1px solid #CCCCCC;
-  border-right: 1px solid #333333;
-  border-bottom: 1px solid #333333;
-  border-left: 1px solid #CCCCCC;
-  border-radius: 8px;
-  text-align: center;
-}
 
 .head {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .description {font-weight: 400; margin: 15px 0;}

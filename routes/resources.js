@@ -1,4 +1,3 @@
-const { response } = require("express");
 const express = require("express");
 const router = express.Router();
 
@@ -7,7 +6,10 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     db.query(
-      `SELECT resources.*, users.name FROM resources JOIN Users ON resources.user_id = users.id;`
+      `SELECT resources.*, users.name 
+       FROM resources 
+       JOIN Users ON resources.user_id = users.id 
+       ORDER BY resources.created_at desc;`
     )
       .then((data) => {
         const resources = data.rows;
@@ -28,7 +30,7 @@ module.exports = (db) => {
       resource_link) VALUES ($1,$2,$3,$4,$5) RETURNING *;`;
 
     const values = [
-      userID, //need to replace this with user id from the cookie
+      userID,
       req.body.title,
       req.body.description,
       req.body.category,
@@ -48,15 +50,6 @@ module.exports = (db) => {
 
   router.post("/searchResults", (req, res) => {
     const queryParams = [];
-    // function titleCase(city) {
-    //   let citySplit = city.toLowerCase().split(' ');
-    //   for (let i = 0; i < citySplit.length; i++) {
-    //     citySplit[i] = citySplit[i].charAt(0).toUpperCase() + citySplit[i].substring(1);
-    //   }
-    //   return citySplit.join(' ');
-    // }
-    // const title = titleCase(req.body.title);
-    // const title = titleCase(req.body.title);
 
     console.log(req.body.category);
     console.log(req.body.title);
@@ -102,7 +95,6 @@ module.exports = (db) => {
     db.query(queryString, values)
       .then((data) => {
         const newResource = data.rows;
-        // res.send({ newResource });
         res.redirect("/resources");
       })
       .catch((err) => {
@@ -193,7 +185,6 @@ module.exports = (db) => {
   /*Get routes start*/
 
   router.get("/new", (req, res) => {
-    // makes a request to localhost:3000/resources/new
     const id = req.session.user_id;
     if (id) {
       res.render("create_resource");
@@ -204,7 +195,9 @@ module.exports = (db) => {
 
   router.get("/comments", (req, res) => {
     db.query(
-      `SELECT comments.*, users.name FROM comments JOIN Users ON users.id = comments.user_id;`
+      `SELECT comments.*, users.name 
+       FROM comments 
+       JOIN Users ON users.id = comments.user_id;`
     )
       .then((data) => {
         res.json(data.rows);
@@ -215,9 +208,14 @@ module.exports = (db) => {
   });
 
   router.get("/comments/:postID", (req, res) => {
-    const value = req.params.postID;
-    const queryString = `SELECT comments.*, users.name FROM comments JOIN Users ON users.id = comments.user_id WHERE comments.resource_id = $1 order by comments.created_at desc; `;
-    db.query(queryString, [value])
+    const value = [req.params.postID];
+    const queryString = `SELECT comments.*, users.name 
+    FROM comments 
+    JOIN Users ON users.id = comments.user_id 
+    WHERE comments.resource_id = $1 
+    ORDER BY comments.created_at desc;`;
+
+    db.query(queryString, value)
       .then((data) => {
         res.json(data.rows);
       })
@@ -293,5 +291,3 @@ module.exports = (db) => {
 
   return router;
 };
-
-/*Get routes end*/
