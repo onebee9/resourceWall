@@ -1,18 +1,15 @@
 
 # Resource Wall
 
-#### By: Ibifuro Odu, Chris Tate & Jimmy Tang
-
-
 A Pintrest clone where users can do the following:
 
-* Save an external URL along with a title and description
-* Search for already-saved resources created by any user
+* Create a "resource", comprising of an external URL, title and description.
+* Search for already-saved resources created by other users
 * Categorize any resource under a topic
 * Comment on any resource
 * Rate any resource
 * Like any resource
-* View all contributed and liked resources on one page ("My resources").
+* View all contributed and liked resources in thier dashboard ("My resources").
 
 
 ## Dependencies
